@@ -105,12 +105,10 @@ is_complete = True
 cell_num = 0
 for c in cells:
     print("Question {0}:".format(cell_num + 1))
-   #  print('--------OUTPUT----------')
     if 'code_regex' in validation_config['rules'][cell_num].keys():
         validate_code(validation_config['rules'][cell_num]['code_regex'], c['source'].strip())
 
     # if the code cell has output:
-    # if 'outputs' in c.keys() and len(c['outputs']) > 0 and "output_regex" in validation_config['rules'][cell_num].keys():
     if "output_regex" in validation_config['rules'][cell_num].keys() and 'outputs' in c.keys() and len(c['outputs']) > 0:
 
         if 'text' in c['outputs'][0].keys():
@@ -130,17 +128,6 @@ for c in cells:
             # validate output here
             validate_answer(validation_config['rules'][cell_num]['output_regex'], c['outputs'][0]['data']['text/plain'].strip())
 
-
-    # if the code cell does not have output
-    # else:
-    #    # if validation_config['rules'][cell_num]['output_regex']:
-    #     if "output_regex" in validation_config['rules'][cell_num].keys() and validation_config['rules'][cell_num]['output_regex']:
-    #         print(bcolors.FAIL + "Wrong" + bcolors.ENDC)
-    #         is_complete = False
-    #     else:
-    #         print(bcolors.OKGREEN + "Correct" + bcolors.ENDC)
-
-
     print('------------------------')
     print('\n\n')
     cell_num += 1
@@ -151,5 +138,3 @@ if is_complete:
     print(bcolors.OKBLUE + flag + bcolors.ENDC)
 else:
     print('Please try again !')
-
-
