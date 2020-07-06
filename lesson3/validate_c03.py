@@ -70,29 +70,30 @@ validation_config = {
     "flag":"{9yTh0n_1F5_lo0P5}",
 
     "rules": [
-        {
+        {   # Question 01
             "id": 0,
-            "code_regex": "(if answer == x:)|(if answer < x:)|(if answer > x:)"
+            "code_regex": "(if x == answer:)|(if x > answer:)|(if x < answer:)"
         },
 
-        {
+        {   # Question 02
             "id": 1,
-            "output_regex": "(88888\n88\n888888\n88\n888888)"
+            "output_regex": "20005000"
         },
 
-        {
+        {   # Question 03
             "id": 2,
-            "output_regex": "(20005000)"
+            "output_regex": "That is my secret, Captain. I am always angry."
         },
 
-        {
+        {   # Question 04
             "id": 3,
-            "output_regex": "(the quick brown fox jumps over the lazy dog)"
+            "output_regex": "\\[ 2 \\] \\[   \\] \\[   \\] \\[   \\] \n\\[   \\] \\[   \\] \\[ 2 \\] \\[   \\] \n\\[   \\] \\[ 2 \\] \\[   \\] \\[   \\] \n\\[   \\] \\[   \\] \\[   \\] \\[ 2 \\]"
         },
 
-        {
+        {   # Question 05
             "id": 4,
-            "code_regex": "(elif bmi > 23:)|(elif bmi > 18.5:)"
+            "code_regex": "break",
+            "output_regex": "(The Sudoku is not solved. Please try again.){1}|(The Sudoku is solved.)"
         }
 
     ]
@@ -109,8 +110,7 @@ for c in cells:
         validate_code(validation_config['rules'][cell_num]['code_regex'], c['source'].strip())
 
     # if the code cell has output:
-    if "output_regex" in validation_config['rules'][cell_num].keys() and 'outputs' in c.keys() and len(c['outputs']) > 0:
-
+    elif "output_regex" in validation_config['rules'][cell_num].keys() and 'outputs' in c.keys() and len(c['outputs']) > 0:
         if 'text' in c['outputs'][0].keys():
 
             # validate output here
